@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Dashboard from './pages/Dashboard'
+import { Route, Routes } from 'react-router-dom'
 
 export default function App() {
   const [hiredPeople, setHiredPeople] = useState([])
@@ -15,7 +16,12 @@ export default function App() {
           </ul>
         </nav>
       </header>
-      <Dashboard hiredPeople={hiredPeople} />
+      <Routes>
+        <Route
+          path="/"
+          element={<Dashboard hiredPeople={hiredPeople} />}
+        />
+      </Routes>
     </>
   )
 }
