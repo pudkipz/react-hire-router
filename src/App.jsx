@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Dashboard from './pages/Dashboard'
-import { Route, Routes } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
 import PersonProfile from './pages/PersonProfile'
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
           p.id = id
           return p
         })
-        console.log(dataWithId)
+        // console.log(dataWithId)
         setPeople(dataWithId)})
   }, [])
 
@@ -26,7 +26,9 @@ export default function App() {
         <h1>Hire Your Team</h1>
         <nav>
           <ul>
-            <li>Dashboard</li>
+            <li>
+              <Link to="/">Dashboard</Link>
+            </li>
           </ul>
         </nav>
       </header>
