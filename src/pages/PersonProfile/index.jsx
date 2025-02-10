@@ -1,3 +1,4 @@
+import HiredPersonForm from './components/HiredPersonForm'
 import HireForm from './components/HireForm'
 import { useParams } from 'react-router-dom'
 
@@ -22,7 +23,11 @@ function PersonProfile(props) {
       <h2>
         {person.name.first} {person.name.last}
       </h2>
-      <HireForm person={person} hireHandler={hireHandler} />
+      {person.wage == null ?
+        <HireForm person={person} hireHandler={hireHandler} />
+        :
+        <HiredPersonForm person={person} hireHandler={hireHandler} />
+      }
     </article>
   )
 }

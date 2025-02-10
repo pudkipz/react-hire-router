@@ -10,11 +10,12 @@ export default function App() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch('https://randomuser.me/api/?results=5')
+    fetch('https://randomuser.me/api/?results=50')
       .then(response => response.json())
       .then(data => {
         const dataWithId = data.results.map((p, id) => {
           p.id = id
+          p.wage = null
           return p
         })
         // console.log(dataWithId)
@@ -47,6 +48,10 @@ export default function App() {
         />
         <Route
           path="/view/:id"
+          element={<PersonProfile people={people} hirePerson={hirePerson} />}
+        />
+        <Route
+          path="/edit/:id"
           element={<PersonProfile people={people} hirePerson={hirePerson} />}
         />
       </Routes>
