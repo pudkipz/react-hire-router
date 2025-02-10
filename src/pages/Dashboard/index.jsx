@@ -9,7 +9,7 @@ function Dashboard(props) {
     <main className="dashboard-layout">
       <section>
         <h2>People</h2>
-        <PeopleList people={people} />
+        <PeopleList people={people.filter(p => !hiredPeople.includes(p))} />
       </section>
       <section>
         <h2>Hired People</h2>
