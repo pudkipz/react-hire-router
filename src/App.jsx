@@ -1,10 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Dashboard from './pages/Dashboard'
 import { Route, Routes } from 'react-router-dom'
+import PersonProfile from './pages/PersonProfile'
 
 export default function App() {
   const [hiredPeople, setHiredPeople] = useState([])
+  const [people, setPeople] = useState([])
+
+  useEffect(() => {
+    fetch('https://randomuser.me/api/?results=5')
+      .then(response => response.json())
+      .then(data => {
+        const dataWithId = data.results.map((p, id) => {
+          p.id = id
+          return p
+        })
+        console.log(dataWithId)
+        setPeople(dataWithId)})
+  }, [])
 
   return (
     <>
@@ -19,7 +33,11 @@ export default function App() {
       <Routes>
         <Route
           path="/"
-          element={<Dashboard hiredPeople={hiredPeople} />}
+          element={<Dashboard people={people} hiredPeople={hiredPeople} />}
+        />
+        <Route
+          path="/view/:id"
+          element={<PersonProfile people={people} />}
         />
       </Routes>
     </>
