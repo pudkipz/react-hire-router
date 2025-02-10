@@ -5,6 +5,12 @@ function PersonProfile(props) {
   // const [person, setPerson] = useState(null)
   const people = props.people
   const id = useParams()
+  const hirePerson = props.hirePerson
+
+  const hireHandler = (wage) => {
+    person.wage = wage
+    hirePerson(person)
+  }
 
   const person = people.find((p) =>
     p.id == id.id)
@@ -16,7 +22,7 @@ function PersonProfile(props) {
       <h2>
         {person.name.first} {person.name.last}
       </h2>
-      <HireForm person={person} />
+      <HireForm person={person} hireHandler={hireHandler} />
     </article>
   )
 }

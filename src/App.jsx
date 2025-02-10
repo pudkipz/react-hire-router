@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Dashboard from './pages/Dashboard'
-import { Link, Route, Routes } from 'react-router-dom'
+import { Link, Route, Routes, useNavigate } from 'react-router-dom'
 import PersonProfile from './pages/PersonProfile'
 
 export default function App() {
   const [hiredPeople, setHiredPeople] = useState([])
   const [people, setPeople] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch('https://randomuser.me/api/?results=5')
@@ -19,6 +20,13 @@ export default function App() {
         // console.log(dataWithId)
         setPeople(dataWithId)})
   }, [])
+
+  const hirePerson = (person) => {
+    if (!hiredPeople.includes(person)) {
+      setHiredPeople([...hiredPeople, person])
+    }
+    navigate("/")
+  }
 
   return (
     <>
@@ -39,7 +47,7 @@ export default function App() {
         />
         <Route
           path="/view/:id"
-          element={<PersonProfile people={people} />}
+          element={<PersonProfile people={people} hirePerson={hirePerson} />}
         />
       </Routes>
     </>
